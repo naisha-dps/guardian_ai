@@ -1,0 +1,21 @@
+# Guardian AI - Backend Dependencies
+fastapi
+uvicorn[standard]
+motor     # Async MongoDB driver
+pymongo
+pydantic
+python-dotenv
+aiohttp
+websockets
+requests
+
+# ML dependencies (for edge inference server mode)
+ultralytics
+onnxruntime
+opencv-python-headless
+numpy
+Pillow
+
+# Utilities
+python-multipart
+bson

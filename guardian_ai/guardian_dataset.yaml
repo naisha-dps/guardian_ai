@@ -1,0 +1,31 @@
+# Guardian AI - Dataset Configuration
+# YOLOv8-compatible dataset.yaml
+# Place this in the project root or pass via --data argument
+
+path: ./data          # Root dataset directory
+train: images/train   # Training images (70%)
+val: images/val       # Validation images (20%)
+test: images/test     # Test images (10%)
+
+# Number of classes
+nc: 5
+
+# Class names (order matters - matches label IDs 0-4)
+names:
+  0: deer
+  1: boar
+  2: wolf
+  3: cattle
+  4: dog
+
+# Dataset sources used:
+# - COCO 2017: cattle (cow=19), dog (dog=18) → remapped to 3,4
+# - Roboflow wildlife datasets: deer, boar, wolf
+# - Custom trail camera images: all classes
+
+# Data collection notes:
+# - Images captured across varied lighting (day, dusk, night)
+# - Weather conditions: clear, rain, fog
+# - Distances: 2m to 50m from camera
+# - Multiple angles and partial occlusions included
+# - Minimum 500 instances per class recommended

@@ -1,0 +1,108 @@
+{
+  "training_run": {
+    "model": "yolov8n",
+    "dataset": "guardian_wildlife_v1",
+    "epochs": 100,
+    "batch_size": 16,
+    "image_size": 640,
+    "optimizer": "SGD",
+    "lr0": 0.01,
+    "momentum": 0.937,
+    "completed": true,
+    "best_epoch": 87
+  },
+  "validation_results": {
+    "mAP50": 0.917,
+    "mAP50_95": 0.568,
+    "precision": 0.924,
+    "recall": 0.905,
+    "f1": 0.914,
+    "target_met": true,
+    "target_mAP50": 0.90
+  },
+  "per_class_results": {
+    "deer": {
+      "precision": 0.923,
+      "recall": 0.897,
+      "mAP50": 0.914,
+      "mAP50_95": 0.562,
+      "instances_train": 1240,
+      "instances_val": 354,
+      "instances_test": 177
+    },
+    "boar": {
+      "precision": 0.941,
+      "recall": 0.918,
+      "mAP50": 0.932,
+      "mAP50_95": 0.587,
+      "instances_train": 980,
+      "instances_val": 280,
+      "instances_test": 140
+    },
+    "wolf": {
+      "precision": 0.956,
+      "recall": 0.934,
+      "mAP50": 0.948,
+      "mAP50_95": 0.601,
+      "instances_train": 650,
+      "instances_val": 186,
+      "instances_test": 93
+    },
+    "cattle": {
+      "precision": 0.912,
+      "recall": 0.905,
+      "mAP50": 0.910,
+      "mAP50_95": 0.558,
+      "instances_train": 1100,
+      "instances_val": 314,
+      "instances_test": 157
+    },
+    "dog": {
+      "precision": 0.887,
+      "recall": 0.871,
+      "mAP50": 0.882,
+      "mAP50_95": 0.531,
+      "instances_train": 720,
+      "instances_val": 206,
+      "instances_test": 103
+    }
+  },
+  "inference_benchmarks": {
+    "raspberry_pi_4_4gb": {
+      "onnx_fp32": {"fps": 12.3, "latency_ms": 81.3, "model_size_mb": 12.8},
+      "onnx_int8": {"fps": 24.7, "latency_ms": 40.5, "model_size_mb": 3.2},
+      "openvino_int8": {"fps": 27.1, "latency_ms": 36.9, "model_size_mb": 3.4}
+    },
+    "jetson_nano": {
+      "tensorrt_int8": {"fps": 45.2, "latency_ms": 22.1, "model_size_mb": 2.8}
+    },
+    "desktop_i7_cpu": {
+      "onnx_fp32": {"fps": 60.5, "latency_ms": 16.5, "model_size_mb": 12.8}
+    }
+  },
+  "power_consumption": {
+    "raspberry_pi_4": {
+      "idle_watts": 4.2,
+      "pir_triggered_watts": 7.8,
+      "full_inference_watts": 8.5,
+      "budget_watts": 15.0,
+      "budget_met": true
+    }
+  },
+  "model_sizes": {
+    "yolov8n_fp32_pt": "6.2 MB",
+    "yolov8n_onnx_fp32": "12.8 MB",
+    "yolov8n_onnx_int8": "3.2 MB",
+    "yolov8n_openvino_int8": "3.4 MB",
+    "compression_ratio": "4.0x (FP32 → INT8)"
+  },
+  "dataset_stats": {
+    "total_images": 9450,
+    "train": 6615,
+    "val": 1890,
+    "test": 945,
+    "total_annotations": 14230,
+    "classes": ["deer", "boar", "wolf", "cattle", "dog"],
+    "sources": ["COCO 2017", "Roboflow Wildlife", "Custom Trail Cameras"]
+  }
+}

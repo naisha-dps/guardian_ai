@@ -1,0 +1,85 @@
+# Guardian AI - .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+
+# ML / Training artifacts
+runs/
+*.pt
+*.onnx
+*.engine
+*.bin
+*.xml
+data/
+*.zip
+*.tar.gz
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# MongoDB data
+data/db/
+
+# Logs
+*.log
+logs/
+offline_queue/
+
+# Flutter
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.packages
+mobile/build/
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/android/app/google-services.json
+mobile/ios/Flutter/
+mobile/ios/Pods/
+mobile/ios/Runner.xcworkspace/
+mobile/ios/GoogleService-Info.plist
+*.lock
+!mobile/pubspec.lock
+
+# Docker
+docker-compose.override.yml
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Models (large files - use git-lfs or cloud storage)
+models/
+*.weights
+
+# Test coverage
+htmlcov/
+.coverage
+.pytest_cache/
+
+# Secrets
+*.pem
+*.key
+firebase_credentials.json

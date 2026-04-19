@@ -1,0 +1,79 @@
+# Guardian AI - Docker Compose
+# ================================
+# Runs: FastAPI backend + MongoDB + Redis (optional)
+#
+# Usage:
+#   docker-compose up -d
+#   docker-compose logs -f guardian_backend
+
+version: '3.9'
+
+services:
+
+  # ─── FastAPI Backend ─────────────────────────────────────────────────────
+  guardian_backend:
+    build:
+      context: ../../backend
+      dockerfile: ../deploy/docker/Dockerfile.backend
+    container_name: guardian_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      DB_NAME: guardian_ai
+      FCM_SERVER_KEY: ${FCM_SERVER_KEY:-YOUR_FCM_KEY}
+      BACKEND_URL: http://guardian_backend:8000
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - guardian_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ─── MongoDB ──────────────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7.0
+    container_name: guardian_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+    networks:
+      - guardian_net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── Nginx Reverse Proxy ──────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: guardian_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - guardian_backend
+    networks:
+      - guardian_net
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  guardian_net:
+    driver: bridge

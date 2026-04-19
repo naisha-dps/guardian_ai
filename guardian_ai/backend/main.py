@@ -23,17 +23,16 @@ from fastapi.responses import JSONResponse
 import uvicorn
 
 from db.database import Database
-from .websocket.manager import WebSocketManager
-from .api.models import (
+from websocket.manager import WebSocketManager
+from api.models import (
     DetectionEvent,
     Alert,
     ControlCommand,
     DeviceStatus,
     HistoryFilter,
 )
-from .utils.notifications import NotificationService
-from .utils.lora_sim import LoRaSimulator
-
+from utils.notifications import NotificationService
+from utils.lora_sim import LoRaSimulator
 # ─── Logging ──────────────────────────────────────────────────────────────────
 
 logging.basicConfig(

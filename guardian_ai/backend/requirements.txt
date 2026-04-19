@@ -18,4 +18,3 @@ Pillow
 
 # Utilities
 python-multipart
-bson

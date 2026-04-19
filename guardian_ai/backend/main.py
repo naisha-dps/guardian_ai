@@ -17,6 +17,17 @@ from datetime import datetime, timedelta
 from typing import Optional, List
 from contextlib import asynccontextmanager
 
+from fastapi.middleware.cors import CORSMiddleware
+
+# Assuming your app is named 'app', paste this right below it:
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # The '*' means "allow anyone, including localhost"
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse

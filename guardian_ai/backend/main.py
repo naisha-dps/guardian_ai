@@ -22,7 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import uvicorn
 
-from .db.database import Database
+from db.database import Database
 from .websocket.manager import WebSocketManager
 from .api.models import (
     DetectionEvent,
